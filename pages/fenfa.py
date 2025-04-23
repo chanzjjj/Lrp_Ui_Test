@@ -1,9 +1,9 @@
 from common.base import Base
 import time
 import pyautogui
-from pages.ludan import LudanPage
 
-class FenfaPage(Base, LudanPage):
+
+class FenfaPage(Base):
     '''定义所需要的元素'''
     ele_shouye_button = ("xpath", '//*[@id="tab-/index"]')   #导航栏最左侧首页按钮
     ele_fenfa_button = ("xpath", '//*[@id="app"]/div/div[2]/div[2]/div[2]/div/div[3]/div/div/div/div[1]/div/dl[3]/dt/img')   #首页样本分发入口
@@ -41,8 +41,8 @@ class FenfaPage(Base, LudanPage):
         '''点击确认接收按钮'''
         self.click(self.ele_receive_button)
 
-    def normal_information(self):
-        ludan = LudanPage()
-        barcode = ludan.normal_infotmation()
+    def normal_information(self, barcode):
         self.to_shouye()
+        self.to_fenfa_page()
+        self.input_barcode(barcode)
 

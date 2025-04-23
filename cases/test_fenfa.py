@@ -8,4 +8,5 @@ class TestFenfa():
         '''分发是否正常'''
         fenfa.open("/#/login")
         login.normal_information()
-        fenfa.normal_information()
+        bar_code = ludan.normal_infotmation()
+        fenfa.normal_information(bar_code)
