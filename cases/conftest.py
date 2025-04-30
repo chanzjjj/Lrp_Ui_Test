@@ -5,7 +5,7 @@ import platform
 from pages.login import LoginPage
 from pages.ludan import LudanPage
 from pages.fenfa import FenfaPage
-
+from pages.jieguo import JieguoPage
 
 
 # @pytest.fixture(scope="session", name="driver")
@@ -27,6 +27,8 @@ def browser():
         # 无界面模式
         chrome_options = Options()
         chrome_options.add_argument('--start-maximized')
+        chrome_options.add_argument("--user-data-dir=/tmp/chrome_profile")  # 缓存用户数据
+        chrome_options.add_argument("--disk-cache-dir=/tmp/chrome_cache")  # 磁盘缓存
         # chrome_options.add_argument('--window-size=1920,1080')  # 设置当前窗口的宽度和高度
         # chrome_options.add_argument('--headless')
         _driver = webdriver.Chrome(options=chrome_options)
@@ -68,3 +70,8 @@ def ludan(driver, base_url):
 def fenfa(driver, base_url):
     fenfa = FenfaPage(driver, base_url)
     return fenfa
+
+@pytest.fixture(scope="session")
+def jieguo(driver, base_url):
+    jieguo = JieguoPage(driver, base_url)
+    return jieguo

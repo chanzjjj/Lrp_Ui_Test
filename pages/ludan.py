@@ -12,7 +12,7 @@ class LudanPage(Base, DailyCounter):
     ele_barcode = ("xpath", '//*[@id="pane-0"]/div/div/div[1]/div[1]/div[2]/div/form/div[1]/div/div/div/div[2]/div[1]/input')   #条码号输入框
     ele_songjian_xiala_button = ("xpath", '//*[@id="pane-0"]/div/div/div[1]/div[1]/div[2]/div/form/div[2]/div/div/div/div[2]/div/span[1]/div/div/button')   #送检单位下拉按钮
     ele_songjian_input = ("xpath", '//*[@id="pane-0"]/div/div/div[1]/div[1]/div[2]/div/form/div[2]/div/div/div/div[2]/div/span[1]/div/input')   #送检单位输入框
-    ele_songjian_window = ("xpath", '//*[@class="el-select-dropdown__item hover"]/div')   #送检单位下拉框
+    ele_songjian_window = ("xpath", '//*[@class="el-select-dropdown__item hover"]/div') #送检单位下拉框 el-select-dropdown__item hover
     ele_name = ("xpath", '//*[@id="pane-0"]/div/div/div[1]/div[1]/div[2]/div/form/div[3]/div/div/div/div[2]/input')   #姓名输入框
     ele_sex_input = ("xpath", '//*[@id="pane-0"]/div/div/div[1]/div[1]/div[2]/div/form/div[5]/div/div/div/div[2]/div[1]/span[1]/div/input')   #性别输入框
     ele_sex_button = ("xpath", '//*[@id="pane-0"]/div/div/div[1]/div[1]/div[2]/div/form/div[5]/div/div/div/div[2]/div[1]/span[1]/div/div/button')   #性别下拉按钮
@@ -58,7 +58,11 @@ class LudanPage(Base, DailyCounter):
 
     def click_songjian_xialakuang(self):
         '''点击送检单位下拉框'''
-        self.click(self.ele_songjian_window)
+        try:
+            self.click(self.ele_songjian_window)
+        except:
+            time.sleep(1)
+            self.click(self.ele_songjian_window)
 
     def get_name(self):
         '''姓名生成规则 自动化250411'''
@@ -121,6 +125,7 @@ class LudanPage(Base, DailyCounter):
 
     def click_quanxuan_button(self):
         '''点击全部勾选按钮'''
+        time.sleep(1)
         self.click(self.ele_quanxuan_button)
 
     def click_submit_button(self):
@@ -135,6 +140,7 @@ class LudanPage(Base, DailyCounter):
         '''输入正确的录单信息'''
         self.to_ludan()
         bar_code = self.barcode_rule()  #获取条码号
+        time.sleep(1)
         self.input_barcode(bar_code)
         self.click_songjian_button()
         self.input_songjian("100417")

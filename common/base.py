@@ -230,6 +230,8 @@ class Base():
         ele = self.find(locator)
         ActionChains(self.driver).move_to_element(ele).perform()
 
+
+
 if __name__ == "__main__":
     driver = webdriver.Chrome()
     web = Base(driver)  # 实例化

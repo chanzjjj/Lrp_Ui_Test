@@ -1,14 +1,14 @@
 from pages.ludan import LudanPage
 from pages.login import LoginPage
 from pages.fenfa import FenfaPage
+from pages.jieguo import  JieguoPage
 
-class TestFenfa():
+class TestJieguo():
 
-    def test_01(self, login:LoginPage, ludan:LudanPage, fenfa:FenfaPage):
-        '''分发是否正常'''
+    def test_01(self, login:LoginPage, ludan:LudanPage, fenfa:FenfaPage, jieguo:JieguoPage):
+        '''结果录入是否正常'''
         fenfa.open("/#/login")  #打开登录页
         login.normal_information()  #登录
         bar_code = ludan.normal_infotmation()  #录单
         fenfa.normal_information(bar_code)  #分发
-        toast_text = fenfa.get_text(fenfa.ele_success_toast)   #获取分发后的toast提示
-        assert toast_text == "接收成功"
+        jieguo.normal_information(bar_code)   #结果录入
